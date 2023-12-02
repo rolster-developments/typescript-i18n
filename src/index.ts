@@ -1,31 +1,44 @@
-export type I18nObject = LiteralObject<LiteralObject<string>>;
+import { interpolation, Interpolators } from '@rolster/helpers-string';
 
-type I18nOptions = LiteralObject<string> | string[];
+type I18nValue = LiteralObject<string>;
 
-type I18nTranslate = (key: string, options?: I18nOptions) => string;
+export type I18nDictionary<T extends I18nValue = I18nValue> = LiteralObject<T>;
 
-let i18nLanguaje = 'es';
+export type I18nParams = I18nValue | string[];
 
-export function setLanguage(language: string): void {
-  i18nLanguaje = language;
+export interface I18nOptions {
+  language?: string;
+  interpolators?: Interpolators;
 }
 
-export function i18n(i18nObject: I18nObject, language?: string): I18nTranslate {
+export type I18nLanguage = (language: string) => void;
+
+export type I18nTranslate<T extends I18nValue = I18nValue> = (
+  key: keyof T,
+  options?: I18nOptions
+) => string;
+
+let i18nLanguageGlobal = 'es';
+
+/* istanbul ignore next */
+export function i18nLanguage(language: string): void {
+  i18nLanguageGlobal = language;
+}
+
+export function i18n<T extends I18nValue = I18nValue>(
+  i18nDictionary: I18nDictionary<T>
+): I18nTranslate<T> {
   return (() => {
-    return (key: string, options?: I18nOptions) => {
-      const collection = i18nObject[language || i18nLanguaje];
+    return (key: keyof T, options?: I18nOptions) => {
+      const collection =
+        i18nDictionary[options?.language || i18nLanguageGlobal];
 
-      const result = collection[key];
-
-      if (result && options) {
-        return result.replace(
-          /{([^{}]*)}/g,
-          (_, key) =>
-            (Array.isArray(options) ? options[+key] : options[key]) || ''
-        );
+      /* istanbul ignore if */
+      if (!collection) {
+        return '';
       }
 
-      return result;
+      return interpolation(collection[key], options?.interpolators);
     };
   })();
 }
