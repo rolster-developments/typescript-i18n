@@ -1,11 +1,11 @@
-# Rolster Helpers String
+# Rolster I18n
 
-Utility package for manipulating String compatible with Typescript projects.
+Utility lightweight simple translation.
 
 ## Installation
 
 ```
-npm i @rolster/helpers-string
+npm i @rolster/i18n
 ```
 
 ## Configuration
