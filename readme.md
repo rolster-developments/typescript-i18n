@@ -1,4 +1,4 @@
-# Rolster I18n
+# Rolster i18n
 
 Utility lightweight simple translation.
 
