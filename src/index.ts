@@ -1,6 +1,6 @@
 import { interpolation, Interpolators } from '@rolster/helpers-string';
 
-type I18nValue = LiteralObject<string>;
+export type I18nValue = LiteralObject<any>;
 
 export type I18nDictionary<T extends I18nValue = I18nValue> = LiteralObject<T>;
 
