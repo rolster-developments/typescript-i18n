@@ -1,4 +1,4 @@
-import { interpolation, Interpolators } from '@rolster/helpers-string';
+import { interpolation, Interpolators } from '@rolster/strings';
 
 export type I18nValue = LiteralObject<any>;
 
@@ -28,7 +28,9 @@ const subscribers: I18nSubscriber[] = [];
 export function i18nLanguage(language: string): void {
   i18nLanguageGlobal = language;
 
-  subscribers.forEach((subscriber) => subscriber(language));
+  subscribers.forEach((subscriber) => {
+    subscriber(language);
+  });
 }
 
 export function i18nSubscribe(subscriber: I18nSubscriber): void {
@@ -40,15 +42,13 @@ export function i18n<T extends I18nValue = I18nValue>(
 ): I18nTranslate<T> {
   return (() => {
     return (key: keyof T, options?: I18nOptions) => {
-      const collection =
-        i18nDictionary[options?.language || i18nLanguageGlobal];
+      const dictionary = options?.language || i18nLanguageGlobal;
 
-      /* istanbul ignore if */
-      if (!collection) {
-        return '';
-      }
+      const collection = i18nDictionary[dictionary];
 
-      return interpolation(collection[key], options?.interpolators);
+      return collection
+        ? interpolation(collection[key], options?.interpolators)
+        : '';
     };
   })();
 }
