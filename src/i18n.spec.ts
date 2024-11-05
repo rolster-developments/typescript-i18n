@@ -1,4 +1,4 @@
-import { i18n } from '.';
+import { i18n } from './i18n';
 
 describe('i18n', () => {
   const i18nValue = {
