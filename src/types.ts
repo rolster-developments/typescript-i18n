@@ -1,6 +1,6 @@
 import { Interpolators } from '@rolster/strings';
 
-export type LanguageCode = 'en' | 'fr' | 'es';
+export type LanguageCode = 'en' | 'es' | 'fr' | 'pr';
 
 export type I18nValue = LiteralObject<any>;
 
