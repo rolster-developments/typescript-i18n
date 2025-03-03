@@ -4,7 +4,9 @@ export type LanguageCode = 'en' | 'es' | 'fr' | 'pt';
 
 export type I18nValue = LiteralObject<any>;
 
-export type I18nDictionary<T extends I18nValue = I18nValue> = LiteralObject<T>;
+export type I18nDictionary<T extends I18nValue = I18nValue> = Partial<
+  LiteralObject<T, LanguageCode>
+>;
 
 export type I18nParams = I18nValue | string[];
 
