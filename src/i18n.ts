@@ -28,7 +28,7 @@ export function i18nSubscribe(subscriber: I18nSubscriber): Unsubscription {
 
   return () => {
     subscribers = subscribers.filter(
-      (currentSubscriber) => subscriber !== currentSubscriber
+      (_subscriber) => subscriber !== _subscriber
     );
   };
 }
@@ -40,7 +40,7 @@ export function i18n<T extends I18nValue = I18nValue>(
     return (key: keyof T, options?: I18nOptions) => {
       const collection = dictionary[options?.language || languageCode];
 
-      return collection
+      return collection && collection[key]
         ? interpolation(collection[key], options?.interpolators)
         : '';
     };
