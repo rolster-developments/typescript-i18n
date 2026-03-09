@@ -13,11 +13,15 @@ export type I18nParams = I18nValue | string[];
 export interface I18nOptions {
   language?: LanguageCode;
   interpolators?: Interpolators;
+  strict?: boolean;
 }
 
 export type I18nLanguage = (language: LanguageCode) => void;
 
-export type I18nTranslate<T extends I18nValue = I18nValue> = (
-  key: keyof T,
-  options?: I18nOptions
-) => string;
+export interface I18nTranslate<T extends I18nValue = I18nValue> {
+  (
+    key: keyof T,
+    options?: Omit<I18nOptions, 'strict'> & { strict?: true }
+  ): string;
+  (key: string, options?: I18nOptions & { strict: false }): string;
+}

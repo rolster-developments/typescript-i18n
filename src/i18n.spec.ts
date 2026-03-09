@@ -17,7 +17,7 @@ describe('i18n', () => {
 
   const translate = i18n(i18nValue);
 
-  it('should generate values with language default', () => {
+  test('should generate values with language default', () => {
     expect(translate('text.plain')).toBe(
       'Un recorrido por las maravillas de la mente'
     );
@@ -37,7 +37,7 @@ describe('i18n', () => {
     ).toBe('Felicitaciones a Benzema y Cristiano Ronaldo por la victoria');
   });
 
-  it('should generate values on change with language EN', () => {
+  test('should generate values on change with language EN', () => {
     const translate = i18n(i18nValue);
 
     expect(translate('text.plain', { language: 'en' })).toBe(
@@ -61,7 +61,7 @@ describe('i18n', () => {
     ).toBe('Congratulations to Bale and Modric for the victory');
   });
 
-  it('should generate values on change language in execution', () => {
+  test('should generate values on change language in execution', () => {
     expect(translate('text.plain', { language: 'en' })).toBe(
       'A tour of the wonders of the mind'
     );
