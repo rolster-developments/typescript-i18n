@@ -1,6 +1,6 @@
 {
   "name": "@rolster/i18n",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "type": "module",
   "description": "Utility lightweight simple translation.",
   "license": "MIT",
@@ -12,7 +12,7 @@
     }
   ],
   "types": "./dist/esm/index.d.ts",
-  "main": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "exports": {
     ".": {
@@ -30,15 +30,15 @@
   "scripts": {
     "prettier": "prettier --write \"src/*.{ts}\"",
     "clean": "rimraf ./dist",
-    "build": "npm run clean && tsc -p tsconfig.app.json && rollup -c rollup.config.js",
+    "build": "npm run clean && tsc -p tsconfig.app.json && rollup -c rollup.config.mjs",
     "test": "vitest run",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@rolster/strings": "^2.3.1"
+    "@rolster/strings": "^3.0.0"
   },
   "devDependencies": {
-    "@rolster/rollup": "^1.0.10",
+    "@rolster/rollup": "^1.1.0",
     "@rolster/types": "^1.1.0",
     "@vitest/ui": "^3.2.4",
     "jsdom": "^27.0.0",
