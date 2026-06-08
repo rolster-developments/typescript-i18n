@@ -2,7 +2,7 @@ import { interpolation } from '@rolster/strings';
 import { Language } from './enums';
 import {
   I18nDictionary,
-  I18nOptions,
+  I18nSafeTranslate,
   I18nTranslate,
   I18nValue,
   LanguageCode
@@ -35,20 +35,23 @@ export function i18nSubscribe(subscriber: I18nSubscriber): Unsubscription {
 export function i18n<T extends I18nValue = I18nValue>(
   dictionary: I18nDictionary<T>
 ): I18nTranslate<T> {
-  return ((key: string, options?: I18nOptions) => {
-    const language = options?.language || languageCode;
-    const collection = dictionary[language];
+  return (key, options) => {
+    const collection = dictionary[options?.language || languageCode];
 
-    if (!collection) {
-      return '';
-    }
+    return collection && collection[key]
+      ? interpolation(collection[key], options?.interpolators)
+      : '';
+  };
+}
 
-    const modeIsStrict = options?.strict !== false;
+export function i18nSafe<T extends I18nValue = I18nValue>(
+  dictionary: I18nDictionary<T>
+): I18nSafeTranslate {
+  return (key, options) => {
+    const collection = dictionary[options?.language || languageCode];
 
-    if (modeIsStrict && !collection.hasOwnProperty(key)) {
-      return '';
-    }
-
-    return interpolation(collection[key], options?.interpolators);
-  }) as I18nTranslate<T>;
+    return collection && collection[key]
+      ? interpolation(collection[key], options?.interpolators)
+      : '';
+  };
 }
