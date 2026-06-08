@@ -1,6 +1,6 @@
 {
   "name": "@rolster/i18n",
-  "version": "3.1.0",
+  "version": "3.1.2",
   "type": "module",
   "description": "Utility lightweight simple translation.",
   "license": "MIT",
