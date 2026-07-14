@@ -1,4 +1,5 @@
 import { interpolation } from '@rolster/strings';
+
 import { Language } from './enums';
 import {
   I18nDictionary,

@@ -11,8 +11,8 @@ export type I18nDictionary<T extends I18nValue = I18nValue> = Partial<
 export type I18nParams = I18nValue | string[];
 
 export interface I18nOptions {
-  language?: LanguageCode;
   interpolators?: Interpolators;
+  language?: LanguageCode;
 }
 
 export type I18nLanguage = (language: LanguageCode) => void;
