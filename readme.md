@@ -118,4 +118,4 @@ The subscriber is a plain `(language: LanguageCode) => void` callback;
 
 ## Contributing
 
-- Daniel Andrés Castillo Pedroza :rocket:
+:sparkles: Daniel Andrés Castillo Pedroza
